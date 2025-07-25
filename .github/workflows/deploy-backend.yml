@@ -13,4 +13,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Render Deploy Hook
-        run: curl -X POST https://api.render.com/deploy/YOUR_DEPLOY_HOOK_URL
+        run: curl -X POST https://api.render.com/deploy/srv-d21jrvvfte5s73fmstlg?key=5kfvKMt6fPg
