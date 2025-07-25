@@ -1,16 +1,36 @@
-name: Deploy Backend to Render
+name: CI - Backend Tests
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
-      - '**.py'
-      - 'questions.json'
-      - '.github/workflows/deploy-backend.yml'
+      - "main.py"
+      - "requirements.txt"
+      - "questions.json"
+      - "tests/**"
+      - ".github/workflows/**"
 
 jobs:
-  render-deploy:
+  test-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Trigger Render Deploy Hook
-        run: curl -X POST https://api.render.com/deploy/srv-d21jrvvfte5s73fmstlg?key=5kfvKMt6fPg
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: 🧪 Run tests
+        run: pytest tests
+
+      - name: 🚀 Trigger Render deploy (only if tests pass)
+        if: success()
+        run: curl -X GET ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
