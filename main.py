@@ -4,8 +4,6 @@ from fastapi import FastAPI
 from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 
-# Trigger redeploy for CORS
-
 app = FastAPI()
 
 DATA_PATH = Path(__file__).parent / "questions.json"
