@@ -39,7 +39,7 @@ poker-trivia-backend/
 ### 📦 Installation
 
 ```bash
-git clone https://github.com/yourusername/poker-trivia-backend.git
+git clone https://github.com/yourusername/trivia-poker-backend.git
 cd poker-trivia-backend
 pip install -r requirements.txt
 ```
